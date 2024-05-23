@@ -11,7 +11,7 @@ IntroMap <- function(Phenodata, trait, Genodata, cores, ID, window = 2000000){
     colnames(Qlist) <- c("Chrom", "Pos", "P", "Effect")
     j = 1
     for( i in seq(from = 1000000, to = (860000000-window), by = window) ){
-      Qlist[j,c(3,4)] <- Intro_test_map(chrom[k], i-1, (i+window+1), datause, trait, Genodata, ID = ID)
+      Qlist[j,c(3,4)] <- Intro_test_map(chrom[k], i-1, (i+window+1), datause, trait, Genodata, ID)
       Qlist[j,2] <- i
       Qlist[j,1] <- chrom[k]
       j = j+1
