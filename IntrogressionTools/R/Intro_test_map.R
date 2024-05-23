@@ -1,10 +1,10 @@
 
 #' @export
-Intro_test_map <- function(Chrm, Start1,End1, Phenodata, trait, Genodata){
+Intro_test_map <- function(Chrm, Start1,End1, Phenodata, trait, Genodata, ID){
 
   INTRO <- dplyr::filter(Genodata, Chrom == Chrm & Start > Start1 & End < End1)
 
-  INTROmean <- INTRO %>% dplyr::group_by(Acc) %>% dplyr::summarise(HWsum = sum(HW_count, na.rm =T), WEsum = sum(WE_count, na.rm = T))
+  INTROmean <- INTRO %>% dplyr::group_by(ID) %>% dplyr::summarise(HWsum = sum(HW_count, na.rm =T), WEsum = sum(WE_count, na.rm = T))
   INTROmean <- INTROmean %>% dplyr::mutate(mean = WEsum/ (HWsum+WEsum))
   INTROB <- dplyr::left_join(Phenodata, INTROmean)
   count = dplyr::filter(INTROB, mean > .5)
