@@ -7,7 +7,7 @@ IntroMap <- function(Phenodata, trait, Genodata, cores, ID, window = 2000000){
   datause <- Phenodata %>% dplyr::select(ID, trait) %>% na.omit()
 
   mapped <- foreach::foreach(k=1:length(chrom), .combine = 'rbind', .packages = 'dplyr', .export = c('Intro_test_map')) %dopar%{
-    Qlist <- as.data.frame(matrix(ncol=3))
+    Qlist <- as.data.frame(matrix(ncol=4))
     colnames(Qlist) <- c("Chrom", "Pos", "P", "Effect")
     j = 1
     for( i in seq(from = 1000000, to = (860000000-window), by = window) ){
