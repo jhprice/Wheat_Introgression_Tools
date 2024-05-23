@@ -1,10 +1,10 @@
 
 #' @export
-IntroMap <- function(Phenodata, trait, Genodata, cores, window = 2000000){
+IntroMap <- function(Phenodata, trait, Genodata, cores, ID, window = 2000000){
 
   chrom <- unique(Genodata$Chrom)
   doParallel::registerDoParallel(cores)
-  datause <- Phenodata %>% dplyr::select(Acc, trait) %>% na.omit()
+  datause <- Phenodata %>% dplyr::select(ID, trait) %>% na.omit()
 
   mapped <- foreach::foreach(k=1:length(chrom), .combine = 'rbind', .packages = 'dplyr', .export = c('Intro_test_map')) %dopar%{
     Qlist <- as.data.frame(matrix(ncol=3))
