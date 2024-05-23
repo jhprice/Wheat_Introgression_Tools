@@ -4,9 +4,9 @@ Intro_test_map <- function(Chrm, Start1,End1, Phenodata, trait, Genodata, ID){
 
   INTRO <- dplyr::filter(Genodata, Chrom == Chrm & Start > Start1 & End < End1)
 
-  INTROmean <- INTRO %>% dplyr::group_by(ID) %>% dplyr::summarise(HWsum = sum(HW_count, na.rm =T), WEsum = sum(WE_count, na.rm = T))
+  INTROmean <- INTRO %>% dplyr::group_by(!!sym(ID)) %>% dplyr::summarise(HWsum = sum(HW_count, na.rm =T), WEsum = sum(WE_count, na.rm = T))
   INTROmean <- INTROmean %>% dplyr::mutate(mean = WEsum/ (HWsum+WEsum))
-  INTROB <- dplyr::left_join(Phenodata, INTROmean)
+  INTROB <- dplyr::left_join(Phenodata, INTROmean, by = ID)
   count = dplyr::filter(INTROB, mean > .5)
   count = nrow(count)
   count2 = dplyr::filter(INTROB, mean < .5)
