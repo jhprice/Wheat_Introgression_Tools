@@ -12,6 +12,7 @@ LazyData: true
 Imports: 
 	doParallel
 Depends: foreach,
-	dplyr
+	dplyr,
+	data.table
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
