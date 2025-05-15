@@ -5,8 +5,8 @@ Intro_test_map <- function(Chrm, Start1, End1, Phenodata, trait, Genodata, ID) {
   INTRO <- dplyr::filter(Genodata, Chrom == Chrm & Start > Start1 & End < End1)
 
   # Dynamically identify columns based on patterns
-  hw_col <- names(Genodata)[stringr::str_detect(names(Genodata), "HW") & stringr::str_detect(names(Genodata), "Count")]
-  we_col <- names(Genodata)[stringr::str_detect(names(Genodata), "WE") & stringr::str_detect(names(Genodata), "Count")]
+  hw_col <- names(Genodata)[stringr::str_detect(names(Genodata), "HW") & stringr::str_detect(names(Genodata), "count")]
+  we_col <- names(Genodata)[stringr::str_detect(names(Genodata), "WE") & stringr::str_detect(names(Genodata), "count")]
 
   # If multiple options exist, stop and warn
   if (length(hw_col) != 1 | length(we_col) != 1) {
